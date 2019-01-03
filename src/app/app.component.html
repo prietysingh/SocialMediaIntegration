@@ -1,0 +1,38 @@
+<div class="container mt-2">
+  <div class="search">
+    <div class="input-group">
+      <input type="text" class="form-control border-right-0" placeholder="Search" [(ngModel)]="searchText"/>
+      <span class="input-group-append" *ngIf="searchText">
+          <button class="input-group-text bg-white" (click)="clear()"><i class="fa fa-times-circle"></i></button>
+      </span>
+      <div class="col-6 input-group-append padding-0">
+        <button class="btn btn-secondary" type="button" (click)="searchTweets()">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <kendo-grid [data]="gridData" [height]="420">
+      <kendo-grid-column field="name" title="Name" width="80">
+      </kendo-grid-column>
+      <kendo-grid-column field="screenName" title="Screen Name" width="80">
+      </kendo-grid-column>
+      <kendo-grid-column field="text" title="Tweet" width="200">
+      </kendo-grid-column>
+      <kendo-grid-column field="createdAt" title="Created Date" width="100">
+          <ng-template kendoGridCellTemplate let-dataItem >
+              <span>{{dataItem.createdAt | date:'medium'}}</span>
+          </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="hastags" title="Hastags" width="100">
+      </kendo-grid-column>
+      <kendo-grid-column field='url' title='URL' width='100'>
+          <ng-template kendoGridCellTemplate let-dataItem >
+            <a  style="color:#007bff; text-decoration: underline;" [href]="dataItem.url" target="_blank">{{dataItem.url}}</a>
+          </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>
